@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from .models import Chapter, Comment
 
-# Create your views here.
+
+def chapter_detail(request, chapter_id):
+    chapter = Chapter.objects.get(pk=chapter_id)
+    comments = Comment.objects.filter(chapter=chapter)
+    return render(request, 'webtoon/chapter_detail.html', {'chapter': chapter, 'comments': comments})
