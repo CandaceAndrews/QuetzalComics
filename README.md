@@ -13,4 +13,6 @@ Goals for this site:<br>
 - get feed for all the users you follow<br>
 - get notifications when someone follows you<br>
 - get notifications when someone comments on your chapter<br>
+- search bar for searching for comics<br>
+- allow users to add tags to their uploads<br>
 
