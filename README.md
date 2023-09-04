@@ -2,7 +2,9 @@
 QuetzalComics: Webtoon site where users can upload and read webcomics. <br>
 <br>
 Goals for this site:<br>
-- log in and create an account<br>
+- log in and create and account<br>
+- profile page with user icon<br>
+- on profile page, see all that you have posted have created<br>
 - create a comic series<br>
 - upload comic chapters<br>
 - comment on other user's comic chapters<br>
