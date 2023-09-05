@@ -42,10 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
     'webtoon_app',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -123,6 +126,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -131,10 +139,27 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'webtoon_app.User'
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
+    'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-    ],
+    ),
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 50,
 }
+
+# Set to True to allow all origins (not recommended for production)
+CORS_ALLOW_ALL_ORIGINS = False
+# Set to True if you want to allow cookies to be sent with requests
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH',
+                      'DELETE', 'OPTIONS']  # List of HTTP methods to allow
+CORS_ALLOW_HEADERS = ['Authorization',
+                      'Content-Type']  # List of allowed headers
+
+# Specify origins that are allowed to access your server
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Example: Allow requests from this address
+    "https://yourdomain.com",  # Example: Allow requests from your production domain
+]
