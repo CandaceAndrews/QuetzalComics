@@ -1,5 +1,5 @@
-# 💥 Webtoon-Project 💬 
-QuetzalComics: Webtoon site where users can upload and read webcomics. <br>
+# 💥 Webcomic-Project 💬 
+QuetzalComics: Webcomic site where users can upload and read comics. <br>
 <br>
 Goals for this site:<br>
 - log in and create and account<br>
