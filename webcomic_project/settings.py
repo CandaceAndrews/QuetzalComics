@@ -12,9 +12,19 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False),
+    USE_S3=(bool, False),
+    RENDER=(bool, False),
+)
 
 # Define the media URL and root
 MEDIA_URL = '/media/'
@@ -24,12 +34,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-t4h3xv4e=nab3i1t8alx-58-s%+_cb5ir_934ci#i4z97jx60m'
+DEBUG = env('DEBUG')
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -83,11 +94,15 @@ WSGI_APPLICATION = 'webcomic_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+if env("RENDER"):
+    ALLOWED_HOSTS.append(env("RENDER_EXTERNAL_HOSTNAME"))
+    DJANGO_SUPERUSER_USERNAME = env("DJANGO_SUPERUSER_USERNAME")
+    DJANGO_SUPERUSER_PASSWORD = env(
+        "DJANGO_SUPERUSER_PASSWORD")
+    DJANGO_SUPERUSER_EMAIL = env("DJANGO_SUPERUSER_EMAIL")
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': env.db(),
 }
 
 
@@ -164,3 +179,7 @@ CORS_ALLOW_HEADERS = ['Authorization',
 #     "http://localhost:3000",  # Example: Allow requests from this address
 #     "https://yourdomain.com",  # Example: Allow requests from your production domain
 # ]
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

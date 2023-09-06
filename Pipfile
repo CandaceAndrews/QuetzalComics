@@ -9,6 +9,8 @@ djangorestframework = "*"
 django-cors-headers = "*"
 djoser = "*"
 pillow = "*"
+django-environ = "*"
+whitenoise = "*"
 
 [dev-packages]
 
