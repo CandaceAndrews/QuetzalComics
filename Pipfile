@@ -11,6 +11,7 @@ djoser = "*"
 pillow = "*"
 django-environ = "*"
 whitenoise = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
