@@ -6,11 +6,25 @@ class User(AbstractUser):
     pass
 
 
+class Series(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    cover_image = models.ImageField(upload_to='series_covers/')
+    creator = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='series_created')
+    followers = models.ManyToManyField(
+        User, related_name='series_followed', blank=True)
+
+    def __str__(self) -> str:
+        return self.title
+
+
 class Chapter(models.Model):
     title = models.CharField(max_length=200)
     image = models.ImageField(upload_to='chapter_images/')
     summary = models.TextField()
     date_published = models.DateTimeField(auto_now_add=True)
+    series = models.ForeignKey(Series, on_delete=models.CASCADE, default=None)
 
 
 class Comment(models.Model):
