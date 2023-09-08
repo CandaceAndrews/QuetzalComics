@@ -26,6 +26,9 @@ class Chapter(models.Model):
     date_published = models.DateTimeField(auto_now_add=True)
     series = models.ForeignKey(Series, on_delete=models.CASCADE, default=None)
 
+    def __str__(self) -> str:
+        return self.title
+
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
