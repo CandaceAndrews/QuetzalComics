@@ -27,7 +27,7 @@ class Chapter(models.Model):
     series = models.ForeignKey(Series, on_delete=models.CASCADE, default=None)
 
     def __str__(self) -> str:
-        return self.title
+        return f"{self.series} - {self.title}"
 
 
 class Comment(models.Model):
