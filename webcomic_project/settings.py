@@ -169,7 +169,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 50,
+    "PAGE_SIZE": 25,
 }
 
 # Set to True to allow all origins (not recommended for production)
@@ -190,3 +190,14 @@ CORS_ALLOW_HEADERS = ['Authorization',
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Tell Crisy Forms to use Bootstap 4 instead of the old version
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+# Redirect User to homepage after they log in
+LOGIN_REDIRECT_URL = 'webcomic-home'
+# Redirect to Login page if user goes to profile not logged in
+LOGIN_URL = 'login'
