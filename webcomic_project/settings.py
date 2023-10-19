@@ -56,8 +56,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    'crispy_forms',
-    'crispy_bootstrap4',
+    # 'crispy_forms',
+    # 'crispy_bootstrap4',
     'djoser',
     'webcomic_app',
     'users',
@@ -193,11 +193,13 @@ INTERNAL_IPS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'users.User'
+
 # Tell Crisy Forms to use Bootstap 4 instead of the old version
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
-CRISPY_TEMPLATE_PACK = "bootstrap4"
+# CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+# CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # Redirect User to homepage after they log in
-LOGIN_REDIRECT_URL = 'webcomic-home'
+# LOGIN_REDIRECT_URL = 'webcomic-home'
 # Redirect to Login page if user goes to profile not logged in
-LOGIN_URL = 'login'
+# LOGIN_URL = 'login'
