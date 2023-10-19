@@ -1,13 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+
 from .models import Chapter, Comment
 
 
-def home(request):
-    return HttpResponse('<h1>QuetzalComics</h1>')
-
-
-def chapter_detail(request, chapter_id):
-    chapter = Chapter.objects.get(pk=chapter_id)
-    comments = Comment.objects.filter(chapter=chapter)
-    return render(request, 'webcomic/chapter_detail.html', {'chapter': chapter, 'comments': comments})
+@api_view(["GET"])
+def api_root(request, format=None):
+    return Response(
+        {
+            ""
+        }
+    )
