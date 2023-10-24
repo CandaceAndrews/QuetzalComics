@@ -9,3 +9,6 @@
 | GET        | /auth/users/me                                                    | Retrieve authenticated user                |
 | PATCH      | /auth/users/me                                                    | Update authenticated user                  |
 | DELETE     | /auth/users/me                                                    | Delete authenticated user                  |
+|            |                                                                   |                                            |
+| GET        | users/<str:username>/                                             | View details for single user               |
+
