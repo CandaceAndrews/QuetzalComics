@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    series_created = serializers.SerializerMetaclass("get_created_series")
+    series_created = serializers.SerializerMethodField()
 
     class Meta:
         model = Profile
@@ -23,5 +23,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             "series_created",
         )
 
-    def get_created_series(self, obj):
-        queryset = Series.objects.filter(creator=obj)
+    def get_series_created(self, obj):
+        created_series = Series.objects.filter(creator=obj.user)
+        series_serializer = SeriesSerializer(created_series, many=True)
+        return series_serializer.data
