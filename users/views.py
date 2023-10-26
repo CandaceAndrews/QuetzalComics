@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
-from .models import User
-from .serializers import UserSerializer
+from .models import User, Profile
+from .serializers import UserSerializer, ProfileSerializer
 
 
 class UserDetailView(generics.RetrieveAPIView):
@@ -14,3 +14,11 @@ class UserDetailView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_field = 'username'
+
+
+class ProfileDetailView(generics.RetrieveAPIView):
+    ''' View details for a user's profile, including their username, profile image, and series created.
+    '''
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    lookup_field = 'user__username'
