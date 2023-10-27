@@ -21,4 +21,4 @@ class ProfileDetailView(generics.RetrieveAPIView):
     '''
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    lookup_url_kwarg = 'username'
+    lookup_field = 'user__username'
