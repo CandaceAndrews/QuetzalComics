@@ -15,11 +15,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     series_created = serializers.SerializerMethodField()
+    username = serializers.CharField(source='user.username')
 
     class Meta:
         model = Profile
         fields = (
-            "user",
+            "username",
             "image",
             "series_created",
         )
