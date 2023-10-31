@@ -19,7 +19,7 @@ def api_root(request):
     return Response(data)
 
 
-class SeriesDetailView(generics.RetreveAPIView):
+class SeriesDetailView(generics.RetrieveAPIView):
     '''view details for single Series
     '''
     # authentication_classes = [TokenAuthentication]
