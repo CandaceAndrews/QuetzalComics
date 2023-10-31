@@ -14,8 +14,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    series_created = serializers.SerializerMethodField()
     username = serializers.CharField(source='user.username')
+    series_created = serializers.SerializerMethodField()
+    series_followed = serializers.SerializerMethodField()
 
     class Meta:
         model = Profile
@@ -23,9 +24,15 @@ class ProfileSerializer(serializers.ModelSerializer):
             "username",
             "image",
             "series_created",
+            "series_followed",
         )
 
     def get_series_created(self, obj):
-        created_series = Series.objects.filter(creator=obj.user)
-        series_serializer = SeriesSerializer(created_series, many=True)
-        return series_serializer.data
+        # Retrieve and serialize the series created by the user
+        series_created = Series.objects.filter(creator=obj.user)
+        return SeriesSerializer(series_created, many=True).data
+
+    def get_series_followed(self, obj):
+        # Retrieve and serialize the series followed by the user
+        series_followed = Series.objects.filter(followers=obj.user)
+        return SeriesSerializer(series_followed, many=True).data

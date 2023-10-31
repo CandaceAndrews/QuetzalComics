@@ -9,6 +9,6 @@ class SeriesSerializer(serializers.ModelSerializer):
             "title",
             "description",
             "cover_image",
-            "creator"
+            "creator",
             "followers",
         )
