@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from .models import User, Profile
 from webcomic_app.models import Series
 from webcomic_app.serializers import SeriesSerializer

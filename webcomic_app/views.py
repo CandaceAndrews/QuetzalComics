@@ -1,10 +1,11 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 
-
-from .models import Chapter, Comment
+from .models import Chapter, Comment, Series
+from .serializers import SeriesSerializer
 
 
 @api_view(['GET'])
@@ -14,6 +15,14 @@ def api_root(request):
     data = {
         "series": "/api/series/",
         "chapters": "/api/chapters/",
-        # Add more links as needed
     }
     return Response(data)
+
+
+class SeriesDetailView(generics.RetreveAPIView):
+    '''view details for single Series
+    '''
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+    queryset = Series.objects.all()
+    serializer_class = SeriesSerializer
