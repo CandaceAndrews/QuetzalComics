@@ -5,6 +5,7 @@ Goals for this site:<br>
 - log in and create and account<br>
 - profile page with user icon<br>
 - on profile page, see all the comic series you have posted<br>
+- detail view / main page for comic (can sub or unsub)
 - create a comic series<br>
 - upload comic chapters<br>
 - edit your chapters<br>
