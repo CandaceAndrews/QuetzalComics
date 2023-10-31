@@ -37,14 +37,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -56,11 +51,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    # 'crispy_forms',
-    # 'crispy_bootstrap4',
     'djoser',
     'webcomic_app',
     'users',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -194,12 +188,3 @@ INTERNAL_IPS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
-
-# Tell Crisy Forms to use Bootstap 4 instead of the old version
-# CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
-# CRISPY_TEMPLATE_PACK = "bootstrap4"
-
-# Redirect User to homepage after they log in
-# LOGIN_REDIRECT_URL = 'webcomic-home'
-# Redirect to Login page if user goes to profile not logged in
-# LOGIN_URL = 'login'
