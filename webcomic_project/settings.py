@@ -168,8 +168,10 @@ REST_FRAMEWORK = {
 
 # Set to True to allow all origins (not recommended for production)
 CORS_ALLOW_ALL_ORIGINS = True
+
 # Set to True if you want to allow cookies to be sent with requests
 CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH',
                       'DELETE', 'OPTIONS']  # List of HTTP methods to allow
 CORS_ALLOW_HEADERS = ['Authorization',
