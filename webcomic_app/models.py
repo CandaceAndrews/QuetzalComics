@@ -1,3 +1,4 @@
+from taggit.managers import TaggableManager
 from django.db import models
 from users.models import User
 
@@ -10,6 +11,7 @@ class Series(models.Model):
         User, on_delete=models.CASCADE, related_name='series_created')
     followers = models.ManyToManyField(
         User, related_name='series_followed', blank=True)
+    tags = TaggableManager()
 
     def __str__(self) -> str:
         return self.title
