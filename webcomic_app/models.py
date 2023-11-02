@@ -1,5 +1,6 @@
 from taggit.managers import TaggableManager
 from django.db import models
+
 from users.models import User
 
 
