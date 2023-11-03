@@ -32,11 +32,21 @@ class SeriesDetailView(generics.RetrieveAPIView):
     serializer_class = SeriesSerializer
 
 
-class SeriesByTagListView(APIView):
+class SeriesByTagsListView(APIView):
     renderer_classes = [JSONRenderer]
 
-    def get(self, request, tag_name, format=None):
-        tag = get_object_or_404(Tag, name=tag_name)
-        series = Series.objects.filter(tags=tag)
+    def get(self, request, format=None):
+        # Get a comma-separated list of tag names from the query parameter 'tags'
+        tag_names = request.GET.get('tags', '').split(',')
+
+        # Filter series that have all the specified tags
+        series = Series.objects.all()
+        for tag_name in tag_names:
+            series = series.filter(tags__name=tag_name)
+
+        if not series:
+            # No series found with the specified tags
+            return Response({"detail": "No series found with the specified tags."}, status=404)
+
         serializer = SeriesSerializer(series, many=True)
         return Response(serializer.data)
