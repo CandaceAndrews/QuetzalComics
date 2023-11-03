@@ -6,6 +6,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 from taggit.models import Tag
 
 from .models import Chapter, Comment, Series
@@ -32,21 +33,17 @@ class SeriesDetailView(generics.RetrieveAPIView):
     serializer_class = SeriesSerializer
 
 
-class SeriesByTagsListView(APIView):
-    renderer_classes = [JSONRenderer]
+class SeriesSearchView(APIView):
+    '''Search for series with the specified tags
+    '''
 
-    def get(self, request, format=None):
-        # Get a comma-separated list of tag names from the query parameter 'tags'
-        tag_names = request.GET.get('tags', '').split(',')
+    def get(self, request):
+        # Get the tags from the query parameters
+        tags = request.GET.getlist('tags')
 
-        # Filter series that have all the specified tags
-        series = Series.objects.all()
-        for tag_name in tag_names:
-            series = series.filter(tags__name=tag_name)
-
-        if not series:
-            # No series found with the specified tags
-            return Response({"detail": "No series found with the specified tags."}, status=404)
+        series = Series.objects.filter(tags__name__in=tags).distinct()
 
         serializer = SeriesSerializer(series, many=True)
+
+        # Return the serialized data in a JSON response
         return Response(serializer.data)
