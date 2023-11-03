@@ -25,8 +25,9 @@ def api_root(request):
 
 
 class SeriesDetailView(generics.RetrieveAPIView):
-    '''view details for single Series
-    '''
+    """
+    retrieve detailed information about a specific series
+    """
     # authentication_classes = [TokenAuthentication]
     # permission_classes = [IsAuthenticated]
     queryset = Series.objects.all()
@@ -34,8 +35,12 @@ class SeriesDetailView(generics.RetrieveAPIView):
 
 
 class SeriesSearchView(APIView):
-    '''Search for series with the specified tags
-    '''
+    """
+    Retrieve a list of series based on the provided tags.
+
+    Accepts query parameter:
+    - tags (string): A comma-separated list of tags to filter series.
+    """
 
     def get(self, request):
         # Get the tags from the query parameters

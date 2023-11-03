@@ -13,5 +13,5 @@
 | GET        | /user/<str:username>/                                             | View details for single user               |
 | GET        | /user/profile/<str:user__username>/                               | View User's Profile                        |
 | GET        | /series/<int:pk>/                                                 | View details for single series             |
-| GET        | /series/tag/<str:tag_name>/                                       | List series with tag entered               |
+| GET        | /series/search/?tags=<str:tag_name>&tags=<str:tag_name>           | Retrieve series list based on tags         |
 
