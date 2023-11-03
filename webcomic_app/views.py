@@ -3,7 +3,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
-from django.views.generic.list import ListView
+from rest_framework.views import APIView
+from rest_framework.renderers import JSONRenderer
 from django.shortcuts import get_object_or_404
 from taggit.models import Tag
 
@@ -31,10 +32,11 @@ class SeriesDetailView(generics.RetrieveAPIView):
     serializer_class = SeriesSerializer
 
 
-class SeriesByTagListView(ListView):
-    serializer_class = SeriesSerializer
+class SeriesByTagListView(APIView):
+    renderer_classes = [JSONRenderer]
 
-    def get_queryset(self):
-        tag_name = self.kwargs['tag_name']
+    def get(self, request, tag_name, format=None):
         tag = get_object_or_404(Tag, name=tag_name)
-        return Series.objects.filter(tags=tag)
+        series = Series.objects.filter(tags=tag)
+        serializer = SeriesSerializer(series, many=True)
+        return Response(serializer.data)
