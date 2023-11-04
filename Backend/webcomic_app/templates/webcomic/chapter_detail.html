@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}<title>Chapter Detail</title>{% endblock %}
+{% block content %}
+<h1>{{ chapter.title }}</h1>
+    
+<img src="{{ MEDIA_URL }}chapter_images/{{ chapter.image.name }}" alt="{{ chapter.title }} Image">
+
+<hr>
+
+<h2>Comments</h2>
+<ul>
+    {% for comment in comments %}
+    <li>
+        <strong>{{ comment.user.username }}</strong> said on {{ comment.date_posted }}:
+        <p>{{ comment.text }}</p>
+    </li>
+    {% empty %}
+    <li>No comments yet.</li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}
