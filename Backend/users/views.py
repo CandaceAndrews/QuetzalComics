@@ -20,8 +20,6 @@ class UserDetailView(generics.RetrieveAPIView):
 class ProfileDetailView(generics.RetrieveAPIView):
     ''' View details for a user's profile
     '''
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     lookup_field = 'user__username'
